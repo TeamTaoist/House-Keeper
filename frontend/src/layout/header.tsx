@@ -7,7 +7,6 @@ import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
 import Button from "@mui/material/Button";
 
 const routes = [
-  { name: "Houses", path: "/" },
   { name: "Hackers", path: "/hackers" },
   { name: "Projects", path: "/projects" },
 ];
@@ -52,6 +51,14 @@ export default function Header() {
             <img src={LogoIcon} alt="" />
           </LogoLink>
           <NavStyle>
+            <li>
+              <LinkStyle
+                to={"/"}
+                className={pathname === "/" ? "selected" : ""}
+              >
+                Houses
+              </LinkStyle>
+            </li>
             {routes.map((route, i) => (
               <li key={i}>
                 <LinkStyle
