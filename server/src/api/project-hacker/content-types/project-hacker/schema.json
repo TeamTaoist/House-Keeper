@@ -4,7 +4,8 @@
   "info": {
     "singularName": "project-hacker",
     "pluralName": "project-hackers",
-    "displayName": "ProjectHacker"
+    "displayName": "ProjectHacker",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,7 +17,7 @@
       "relation": "oneToOne",
       "target": "api::project.project"
     },
-    "users": {
+    "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
