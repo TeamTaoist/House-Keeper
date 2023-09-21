@@ -575,6 +575,52 @@ export interface PluginUsersPermissionsRole extends Schema.CollectionType {
   };
 }
 
+export interface IUser {
+  username: Attribute.String &
+    Attribute.Required &
+    Attribute.Unique &
+    Attribute.SetMinMaxLength<{
+      minLength: 3;
+    }>;
+  email: Attribute.Email &
+    Attribute.Required &
+    Attribute.SetMinMaxLength<{
+      minLength: 6;
+    }>;
+  provider: Attribute.String;
+  password: Attribute.Password &
+    Attribute.Private &
+    Attribute.SetMinMaxLength<{
+      minLength: 6;
+    }>;
+  resetPasswordToken: Attribute.String & Attribute.Private;
+  confirmationToken: Attribute.String & Attribute.Private;
+  confirmed: Attribute.Boolean & Attribute.DefaultTo<false>;
+  blocked: Attribute.Boolean & Attribute.DefaultTo<false>;
+  role: Attribute.Relation<
+    "plugin::users-permissions.user",
+    "manyToOne",
+    "plugin::users-permissions.role"
+  >;
+  address: Attribute.String;
+  github: Attribute.String;
+  likeCount: Attribute.Integer;
+  createdAt: Attribute.DateTime;
+  updatedAt: Attribute.DateTime;
+  createdBy: Attribute.Relation<
+    "plugin::users-permissions.user",
+    "oneToOne",
+    "admin::user"
+  > &
+    Attribute.Private;
+  updatedBy: Attribute.Relation<
+    "plugin::users-permissions.user",
+    "oneToOne",
+    "admin::user"
+  > &
+    Attribute.Private;
+}
+
 export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   collectionName: 'up_users';
   info: {
@@ -587,51 +633,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   options: {
     draftAndPublish: false;
   };
-  attributes: {
-    username: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 3;
-      }>;
-    email: Attribute.Email &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 6;
-      }>;
-    provider: Attribute.String;
-    password: Attribute.Password &
-      Attribute.Private &
-      Attribute.SetMinMaxLength<{
-        minLength: 6;
-      }>;
-    resetPasswordToken: Attribute.String & Attribute.Private;
-    confirmationToken: Attribute.String & Attribute.Private;
-    confirmed: Attribute.Boolean & Attribute.DefaultTo<false>;
-    blocked: Attribute.Boolean & Attribute.DefaultTo<false>;
-    role: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'manyToOne',
-      'plugin::users-permissions.role'
-    >;
-    address: Attribute.String;
-    github: Attribute.String;
-    likeCount: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
+  attributes: IUser;
 }
 
 export interface PluginI18NLocale extends Schema.CollectionType {
@@ -678,6 +680,25 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface IEvent {
+  id: number;
+  title: Attribute.Text;
+  subtitle: Attribute.Text;
+  description: Attribute.Text;
+  type: Attribute.String;
+  startDate: Attribute.DateTime;
+  endDate: Attribute.DateTime;
+  house: Attribute.Relation<"api::event.event", "oneToOne", "api::house.house">;
+  cover: Attribute.Media;
+  createdAt: Attribute.DateTime;
+  updatedAt: Attribute.DateTime;
+  publishedAt: Attribute.DateTime;
+  createdBy: Attribute.Relation<"api::event.event", "oneToOne", "admin::user"> &
+    Attribute.Private;
+  updatedBy: Attribute.Relation<"api::event.event", "oneToOne", "admin::user"> &
+    Attribute.Private;
+}
+
 export interface ApiEventEvent extends Schema.CollectionType {
   collectionName: "events";
   info: {
@@ -689,36 +710,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
-  attributes: {
-    id: number;
-    title: Attribute.Text;
-    subtitle: Attribute.Text;
-    description: Attribute.Text;
-    type: Attribute.String;
-    startDate: Attribute.DateTime;
-    endDate: Attribute.DateTime;
-    house: Attribute.Relation<
-      "api::event.event",
-      "oneToOne",
-      "api::house.house"
-    >;
-    cover: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      "api::event.event",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      "api::event.event",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-  };
+  attributes: IEvent;
 }
 
 export interface ApiEventGuestEventGuest extends Schema.CollectionType {
@@ -786,6 +778,35 @@ export interface ApiHouseHouse extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: IHouse;
+  id: number;
+}
+
+export interface IProject {
+  id: number;
+  cover: Attribute.Media;
+  name: Attribute.Text;
+  introduction: Attribute.Text;
+  github: Attribute.String;
+  house: Attribute.Relation<
+    "api::project.project",
+    "oneToOne",
+    "api::house.house"
+  >;
+  createdAt: Attribute.DateTime;
+  updatedAt: Attribute.DateTime;
+  publishedAt: Attribute.DateTime;
+  createdBy: Attribute.Relation<
+    "api::project.project",
+    "oneToOne",
+    "admin::user"
+  > &
+    Attribute.Private;
+  updatedBy: Attribute.Relation<
+    "api::project.project",
+    "oneToOne",
+    "admin::user"
+  > &
+    Attribute.Private;
 }
 
 export interface ApiProjectProject extends Schema.CollectionType {
@@ -799,33 +820,37 @@ export interface ApiProjectProject extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
-  attributes: {
-    id: number;
-    cover: Attribute.Media;
-    name: Attribute.Text;
-    introduction: Attribute.Text;
-    github: Attribute.String;
-    house: Attribute.Relation<
-      "api::project.project",
-      "oneToOne",
-      "api::house.house"
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      "api::project.project",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      "api::project.project",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-  };
+  attributes: IProject;
+  id: number;
+}
+
+interface IProjectHacker {
+  id: number;
+  project: Attribute.Relation<
+    "api::project-hacker.project-hacker",
+    "oneToOne",
+    "api::project.project"
+  >;
+  users: Attribute.Relation<
+    "api::project-hacker.project-hacker",
+    "oneToOne",
+    "plugin::users-permissions.user"
+  >;
+  createdAt: Attribute.DateTime;
+  updatedAt: Attribute.DateTime;
+  publishedAt: Attribute.DateTime;
+  createdBy: Attribute.Relation<
+    "api::project-hacker.project-hacker",
+    "oneToOne",
+    "admin::user"
+  > &
+    Attribute.Private;
+  updatedBy: Attribute.Relation<
+    "api::project-hacker.project-hacker",
+    "oneToOne",
+    "admin::user"
+  > &
+    Attribute.Private;
 }
 
 export interface ApiProjectHackerProjectHacker extends Schema.CollectionType {
@@ -838,34 +863,51 @@ export interface ApiProjectHackerProjectHacker extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
-  attributes: {
-    id: number;
-    project: Attribute.Relation<
-      "api::project-hacker.project-hacker",
-      "oneToOne",
-      "api::project.project"
-    >;
-    users: Attribute.Relation<
-      "api::project-hacker.project-hacker",
-      "oneToOne",
-      "plugin::users-permissions.user"
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      "api::project-hacker.project-hacker",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      "api::project-hacker.project-hacker",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
+  attributes: IProjectHacker;
+  id: number;
+}
+
+export interface IHouseHacker {
+  house: Attribute.Relation<
+    "api::house-hacker.house-hacker",
+    "oneToOne",
+    "api::house.house"
+  >;
+  users: Attribute.Relation<
+    "api::house-hacker.house-hacker",
+    "oneToOne",
+    "plugin::users-permissions.user"
+  >;
+  createdAt: Attribute.DateTime;
+  updatedAt: Attribute.DateTime;
+  publishedAt: Attribute.DateTime;
+  createdBy: Attribute.Relation<
+    "api::house-hacker.house-hacker",
+    "oneToOne",
+    "admin::user"
+  > &
+    Attribute.Private;
+  updatedBy: Attribute.Relation<
+    "api::house-hacker.house-hacker",
+    "oneToOne",
+    "admin::user"
+  > &
+    Attribute.Private;
+}
+
+export interface ApiHouseHackerHouseHacker extends Schema.CollectionType {
+  collectionName: "house_hackers";
+  info: {
+    singularName: "house-hacker";
+    pluralName: "house-hackers";
+    displayName: "HouseHacker";
+    description: "";
   };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: IHouseHacker;
+  id: number;
 }
 
 declare module '@strapi/strapi' {

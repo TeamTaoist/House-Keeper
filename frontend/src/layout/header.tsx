@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LogoIcon from "assets/images/logo.jpg";
+import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";
+import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
+import Button from "@mui/material/Button";
 
 const routes = [
   { name: "Houses", path: "/" },
@@ -9,7 +13,36 @@ const routes = [
 ];
 
 export default function Header() {
-  const doConnect = () => {};
+  const [selectedAccount, setSelectedAccount] =
+    useState<InjectedAccountWithMeta>();
+  
+  const formatAddress = (address: string) => { 
+    return address.slice(0, 6) + "..." + address.slice(-4)
+  }
+
+  const connectWallet = async () => {
+    const { web3Enable, web3Accounts } = await import(
+      "@polkadot/extension-dapp"
+    );
+    const extensions = web3Enable("Polki");
+
+    if (!extensions) {
+      throw Error("No Extension Found");
+    }
+
+    const allAccounts = await web3Accounts();
+
+    console.log(allAccounts);
+
+    if (allAccounts.length) {
+      setSelectedAccount(allAccounts[0]);
+    }
+  };
+
+  useEffect(() => {
+    connectWallet();
+  }, []);
+
   return (
     <HeaderStyle>
       <HeaderContainer>
@@ -25,7 +58,15 @@ export default function Header() {
             ))}
           </NavStyle>
         </HeaderLeft>
-        <div onClick={doConnect}>connect</div>
+        {selectedAccount ? (
+          <UserBox>
+            <Link to="/">{formatAddress(selectedAccount.address)}</Link>
+          </UserBox>
+        ) : (
+          <Button variant="contained" onClick={connectWallet}>
+            connect
+          </Button>
+        )}
       </HeaderContainer>
     </HeaderStyle>
   );
@@ -66,4 +107,13 @@ const NavStyle = styled.ul`
 
 const LinkStyle = styled(Link)`
   font-size: 18px;
+`;
+
+const UserBox = styled.div`
+  a {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 6px 12px;
+  }
 `;
