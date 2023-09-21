@@ -38,7 +38,7 @@ export default function ProjectModal({ data, handleClose }: IProps) {
 
 const BoxStyle = styled(Box)`
   background-color: #fff;
-  width: 400px;
+  width: 60%;
   position: absolute;
   top: 50%;
   left: 50%;

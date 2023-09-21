@@ -54,7 +54,9 @@ export default function Header() {
             <li>
               <LinkStyle
                 to={"/"}
-                className={pathname === "/" ? "selected" : ""}
+                className={
+                  pathname === "/" || pathname.startsWith("/house") ? "selected" : ""
+                }
               >
                 Houses
               </LinkStyle>

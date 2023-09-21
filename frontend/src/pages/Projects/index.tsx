@@ -9,9 +9,13 @@ import {
   ApiProjectProject,
   IProject,
   ApiProjectHackerProjectHacker,
-  IProjectHacker,
   IUser
 } from "types/contentTypes";
+
+const formatImg = (path: string) => {
+  return `https://hk-strapi.taoist.dev/${path}`;
+};
+
 
 interface IProjectCardProps { 
   data: IProject
@@ -80,11 +84,20 @@ export default function Projects() {
 
   useEffect(() => {
     const getProjects = () => {
-      request.find<ApiProjectProject[]>("projects").then((res) => {
-        console.log(res);
-        setProjects(res.data.map((item) => ({ ...item.attributes, id: item.id })));
-        
-      });
+      request
+        .find<ApiProjectProject[]>("projects", {
+          populate: "*",
+        })
+        .then((res) => {
+          console.log(res);
+          setProjects(
+            res.data.map((item) => ({
+              ...item.attributes,
+              id: item.id,
+              cover: formatImg(item.attributes.cover.data.attributes.url),
+            }))
+          );
+        });
     }
     getProjects();
   }, []);
