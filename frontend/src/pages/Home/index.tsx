@@ -12,7 +12,7 @@ export default function Home() {
     const getList = () => {
       request.find<ApiHouseHouse[]>("houses").then((res) => {
         console.log("res: ", res);
-        setHouses(res.data.map(r => r.attributes));
+        setHouses(res.data.map(r => ({...r.attributes, id: r.id})));
       });
     };
     getList();

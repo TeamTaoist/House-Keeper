@@ -30,7 +30,7 @@ export default function HouseCard({ data }: IProps) {
   }, [data]);
 
   return (
-    <CardStyle sx={{ width: 345 }} onClick={() => navigate(`/house/${1}`)}>
+    <CardStyle sx={{ width: 345 }} onClick={() => navigate(`/house/${data.id}`)}>
       <StatusBox>
         <span className="status">{formatStatus}</span>
       </StatusBox>

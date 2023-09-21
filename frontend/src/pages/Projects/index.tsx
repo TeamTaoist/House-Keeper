@@ -3,15 +3,48 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import HackerAvatar from "components/hackerAvatar";
+import { useEffect, useState } from "react";
+import request from "request/index";
+import {
+  ApiProjectProject,
+  IProject,
+  ApiProjectHackerProjectHacker,
+  IProjectHacker,
+  IUser
+} from "types/contentTypes";
 
-const ProjectCard = () => {
+interface IProjectCardProps { 
+  data: IProject
+}
+
+const ProjectCard = ({ data }: IProjectCardProps) => {
+  const [hackers, setHackers] = useState<IUser[]>([]);
+  useEffect(() => {
+    const getHackers = () => {
+      request
+        .find<ApiProjectHackerProjectHacker[]>("project-hackers", {
+          filters: {
+            project: {
+              id: {
+                $eq: data.id,
+              },
+            },
+          },
+        })
+        .then((res) => {
+          let users: IUser[] = [];
+          res.data.forEach((item) => {
+            users = users.concat(item.attributes.users || []);
+          });
+          setHackers(users);
+        });
+    };
+    data.id && getHackers();
+  }, [data.id]);
+  console.log("users", hackers)
   return (
     <CardStyle>
-      <img
-        style={{ width: "100%" }}
-        src="https://www.thesprucepets.com/thmb/APYdMl_MTqwODmH4dDqaY5q0UoE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/all-about-tabby-cats-552489-hero-a23a9118af8c477b914a0a1570d4f787.jpg"
-        alt=""
-      />
+      <img style={{ width: "100%" }} src={data.cover} alt="" />
       <CardContent>
         <Typography
           gutterBottom
@@ -19,26 +52,23 @@ const ProjectCard = () => {
           component="div"
           style={{ textAlign: "center" }}
         >
-          Build dApps on Vara Network
+          {data.name}
         </Typography>
         <p>项目简介</p>
         <Typography variant="body2" color="text.secondary">
-          作为创新的引领者，Gear's Hacker House 将让你 晋身千
-          Web3技术前沿，与来自全球的开发者一同 探索非EVM 生态的独特魅力，在Vara
-          Network 上构建去中心化应用，挑战创新极限！无论你是富
-          有经验的技术大牛，还是刚踏入区块链领域的新
-          手，欢迎加入我们，一起燃起激情，汇聚创意、洴 发思维的火花！
+          {data.introduction}
         </Typography>
         <p>Github地址</p>
         <Typography variant="body2" color="text.secondary">
-          <a href="https://github.com" target="_blank" rel="noreferrer">
-            https://github.com
+          <a href={data.github} target="_blank" rel="noreferrer">
+            {data.github}
           </a>
         </Typography>
         <p>项目成员</p>
         <MemberList>
-          <HackerAvatar name="Li Lei" size="40px" />
-          <HackerAvatar name="Li Lei" size="40px" />
+          {hackers.map((item, i) => (
+            <HackerAvatar name={item.username} size="40px" key={i} />
+          ))}
         </MemberList>
       </CardContent>
     </CardStyle>
@@ -46,21 +76,26 @@ const ProjectCard = () => {
 };
 
 export default function Projects() {
+  const [projects, setProjects] = useState<IProject[]>([]);
+
+  useEffect(() => {
+    const getProjects = () => {
+      request.find<ApiProjectProject[]>("projects").then((res) => {
+        console.log(res);
+        setProjects(res.data.map((item) => ({ ...item.attributes, id: item.id })));
+        
+      });
+    }
+    getProjects();
+  }, []);
   return (
     <Contanier>
       <List>
-        <li>
-          <ProjectCard />
-        </li>
-        <li>
-          <ProjectCard />
-        </li>
-        <li>
-          <ProjectCard />
-        </li>
-        <li>
-          <ProjectCard />
-        </li>
+        {projects.map((item, i) => (
+          <li key={i}>
+            <ProjectCard data={item} />
+          </li>
+        ))}
       </List>
     </Contanier>
   );
