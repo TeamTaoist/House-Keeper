@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LogoIcon from "assets/images/logo.jpg";
 import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";
 import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
@@ -13,12 +13,13 @@ const routes = [
 ];
 
 export default function Header() {
+  const { pathname } = useLocation();
   const [selectedAccount, setSelectedAccount] =
     useState<InjectedAccountWithMeta>();
-  
-  const formatAddress = (address: string) => { 
-    return address.slice(0, 6) + "..." + address.slice(-4)
-  }
+
+  const formatAddress = (address: string) => {
+    return address.slice(0, 6) + "..." + address.slice(-4);
+  };
 
   const connectWallet = async () => {
     const { web3Enable, web3Accounts } = await import(
@@ -53,7 +54,12 @@ export default function Header() {
           <NavStyle>
             {routes.map((route, i) => (
               <li key={i}>
-                <LinkStyle to={route.path}>{route.name}</LinkStyle>
+                <LinkStyle
+                  to={route.path}
+                  className={pathname.startsWith(route.path) ? "selected" : ""}
+                >
+                  {route.name}
+                </LinkStyle>
               </li>
             ))}
           </NavStyle>
@@ -107,6 +113,10 @@ const NavStyle = styled.ul`
 
 const LinkStyle = styled(Link)`
   font-size: 18px;
+  &.selected {
+    font-weight: bold;
+    color: #000;
+  }
 `;
 
 const UserBox = styled.div`
