@@ -6,24 +6,8 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import HackerAvatar from "components/hackerAvatar";
 
-interface IHackerProps {
-  name: string;
-}
-
-const Hacker = ({ name }: IHackerProps) => {
-  return (
-    <li>
-      <div>
-        <img
-          src={`https://api.dicebear.com/7.x/lorelei/svg?seed=${name}`}
-          alt="avatar"
-        />
-      </div>
-      <p>{name}</p>
-    </li>
-  );
-};
 
 export default function Hackers() {
   return (
@@ -34,20 +18,16 @@ export default function Hackers() {
         </Typography>
         <HackerList>
           {Array.from({ length: 10 }).map((_, index) => (
-            <Hacker name="HAN MAYMAY" key={index} />
+            <li key={index}>
+              <HackerAvatar name="HAN MAYMAY" />
+            </li>
           ))}
         </HackerList>
       </div>
       <div className="right">
         <HackerCard>
           <HackerCardHead>
-            <img
-              src="https://api.dicebear.com/7.x/lorelei/svg?seed=2"
-              alt="avatar"
-            />
-            <Typography variant="h5" component="div" className="name">
-              HAN MAYMAY
-            </Typography>
+            <HackerAvatar name="HAN MAYMAY" size="large" />
           </HackerCardHead>
           <CardContent>
             <ItemBox>
@@ -113,6 +93,7 @@ const Container = styled.div`
   height: calc(100vh - 80px);
   display: flex;
   padding-inline: 40px;
+  gap: 60px;
   & > div {
     height: 100%;
   }
@@ -134,16 +115,7 @@ const HackerCard = styled(Card)`
 `;
 
 const HackerCardHead = styled.div`
-  text-align: center;
-  img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid #000;
-  }
-  .name {
-    margin-block: 15px;
-  }
+  margin-block: 15px;
 `;
 
 const Num = styled.span`
@@ -203,14 +175,5 @@ const HackerList = styled.ul`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      border: 2px solid #000;
-    }
-    p {
-      margin-top: 10px;
-    }
   }
 `;
