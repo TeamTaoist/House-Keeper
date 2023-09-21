@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { IEvent } from "types/contentTypes";
+import { IEvent, IProject } from "types/contentTypes";
 import { formatTime } from "utils/time";
 
 interface IProps {
-  data?: IEvent;
+  data?: IProject;
   handleClose: () => void;
 }
-export default function EventModal({ data, handleClose }: IProps) {
+export default function ProjectModal({ data, handleClose }: IProps) {
   return (
     <Modal
       open={true}
@@ -20,16 +20,16 @@ export default function EventModal({ data, handleClose }: IProps) {
       <BoxStyle>
         <img src={data?.cover} alt="" />
         <Typography variant="h5" component="h2">
-          {data?.title}
-        </Typography>
-        <Typography variant="h6" component="p">
-          {data?.description}
+          {data?.name}
         </Typography>
         <Typography variant="body2" component="p">
-          {data?.description}
+          {data?.introduction}
         </Typography>
         <Typography variant="body2" component="p">
-          Date: {formatTime(data?.startDate)} - {formatTime(data?.endDate)}
+          Github:{" "}
+          <a href={data?.github} target="_blank" rel="noreferrer">
+            {data?.github}
+          </a>
         </Typography>
       </BoxStyle>
     </Modal>
@@ -43,11 +43,11 @@ const BoxStyle = styled(Box)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 30px;
+  padding: 20px 30px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  img {
-    width: 100%;
+  a {
+    text-decoration: underline;
   }
 `;

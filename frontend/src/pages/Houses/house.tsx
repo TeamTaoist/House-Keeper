@@ -18,6 +18,11 @@ import {
   IUser,
 } from "types/contentTypes";
 import EventModal from "./eventModal";
+import ProjectModal from "./projectModal";
+
+const formatImg = (path: string) => {
+  return `https://hk-strapi.taoist.dev/${path}`
+}
 
 export default function HouseInfo() {
   const { id } = useParams();
@@ -26,12 +31,22 @@ export default function HouseInfo() {
   const [projects, setProjects] = useState<IProject[]>([]);
   const [hackers, setHackers] = useState<IUser[]>([]);
   const [showEvent, setShowEvent] = useState<IEvent>();
+  const [showProj, setShowProj] = useState<IProject>();
 
   useEffect(() => {
     const getDetail = () => {
-      request.findOne<ApiHouseHouse>("houses", Number(id)).then((res) => {
-        setData({ ...res.data.attributes, id: res.data.id });
-      });
+      request
+        .findOne<ApiHouseHouse>("houses", Number(id), {
+          populate: "*",
+        })
+        .then((res) => {
+          setData({
+            ...res.data.attributes,
+            id: res.data.id,
+            cover: formatImg(res.data.attributes.cover.data.attributes.url),
+          });
+        });
+          
     };
     getDetail();
   }, [id]);
@@ -45,9 +60,15 @@ export default function HouseInfo() {
               id: { $eq: id },
             },
           },
+          populate: "*",
         })
         .then((res) => {
-          setEvents(res.data.map((item) => item.attributes));
+          setEvents(
+            res.data.map((item) => ({
+              ...item.attributes,
+              cover: formatImg(item.attributes.cover.data.attributes.url),
+            }))
+          );
         });
     };
     getDetail();
@@ -62,9 +83,15 @@ export default function HouseInfo() {
               id: { $eq: id },
             },
           },
+          populate: "*",
         })
         .then((res) => {
-          setProjects(res.data.map((item) => item.attributes));
+          setProjects(
+            res.data.map((item) => ({
+              ...item.attributes,
+              cover: formatImg(item.attributes.cover.data.attributes.url),
+            }))
+          );
         });
     };
     getDetail();
@@ -148,7 +175,7 @@ export default function HouseInfo() {
           </SectionTitle>
           <List>
             {projects.map((item, i) => (
-              <li key={i}>
+              <li key={i} onClick={() => setShowProj(item)}>
                 <Card>{item.name}</Card>
               </li>
             ))}
@@ -168,7 +195,16 @@ export default function HouseInfo() {
         </section>
       </div>
       {showEvent && (
-        <EventModal handleClose={() => setShowEvent(undefined)} data={showEvent} />
+        <EventModal
+          handleClose={() => setShowEvent(undefined)}
+          data={showEvent}
+        />
+      )}
+      {showProj && (
+        <ProjectModal
+          handleClose={() => setShowProj(undefined)}
+          data={showProj}
+        />
       )}
     </Container>
   );
@@ -201,6 +237,7 @@ const List = styled.ul`
     height: 70px;
     text-align: center;
     line-height: 70px;
+    cursor: pointer;
   }
 `;
 
