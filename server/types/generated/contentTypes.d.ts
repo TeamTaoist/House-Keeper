@@ -791,6 +791,46 @@ export interface ApiHouseHouse extends Schema.CollectionType {
   };
 }
 
+export interface ApiHouseHackerHouseHacker extends Schema.CollectionType {
+  collectionName: 'house_hackers';
+  info: {
+    singularName: 'house-hacker';
+    pluralName: 'house-hackers';
+    displayName: 'HouseHacker';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    house: Attribute.Relation<
+      'api::house-hacker.house-hacker',
+      'oneToOne',
+      'api::house.house'
+    >;
+    users: Attribute.Relation<
+      'api::house-hacker.house-hacker',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::house-hacker.house-hacker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::house-hacker.house-hacker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProjectProject extends Schema.CollectionType {
   collectionName: 'projects';
   info: {
@@ -888,6 +928,7 @@ declare module '@strapi/strapi' {
       'api::event.event': ApiEventEvent;
       'api::event-guest.event-guest': ApiEventGuestEventGuest;
       'api::house.house': ApiHouseHouse;
+      'api::house-hacker.house-hacker': ApiHouseHackerHouseHacker;
       'api::project.project': ApiProjectProject;
       'api::project-hacker.project-hacker': ApiProjectHackerProjectHacker;
     }

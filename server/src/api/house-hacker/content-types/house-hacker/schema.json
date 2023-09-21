@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "house_hackers",
+  "info": {
+    "singularName": "house-hacker",
+    "pluralName": "house-hackers",
+    "displayName": "HouseHacker",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "house": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::house.house"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

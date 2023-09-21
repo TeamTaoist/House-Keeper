@@ -16,6 +16,11 @@ House
 * startDate (示例：01/01/2023)
 * endDate (示例：01/01/2023)
 
+HouseHacker
+* id
+* project_id
+* user_id
+
 
 Event 活动
 * id
