@@ -586,7 +586,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -615,6 +614,9 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    address: Attribute.String;
+    github: Attribute.String;
+    likeCount: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -676,6 +678,197 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.Text;
+    subtitle: Attribute.Text;
+    description: Attribute.Text;
+    type: Attribute.String;
+    startDate: Attribute.DateTime;
+    endDate: Attribute.DateTime;
+    house: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'api::house.house'
+    >;
+    cover: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventGuestEventGuest extends Schema.CollectionType {
+  collectionName: 'event_guests';
+  info: {
+    singularName: 'event-guest';
+    pluralName: 'event-guests';
+    displayName: 'EventGuest';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.Text;
+    introduction: Attribute.Text;
+    event: Attribute.Relation<
+      'api::event-guest.event-guest',
+      'oneToOne',
+      'api::event.event'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event-guest.event-guest',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event-guest.event-guest',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHouseHouse extends Schema.CollectionType {
+  collectionName: 'houses';
+  info: {
+    singularName: 'house';
+    pluralName: 'houses';
+    displayName: 'House';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cover: Attribute.Media;
+    title: Attribute.Text;
+    subtitle: Attribute.Text;
+    description: Attribute.Text;
+    startDate: Attribute.Date;
+    endDate: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::house.house',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::house.house',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProjectProject extends Schema.CollectionType {
+  collectionName: 'projects';
+  info: {
+    singularName: 'project';
+    pluralName: 'projects';
+    displayName: 'Project';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cover: Attribute.Media;
+    name: Attribute.Text;
+    introduction: Attribute.Text;
+    github: Attribute.String;
+    house: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'api::house.house'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProjectHackerProjectHacker extends Schema.CollectionType {
+  collectionName: 'project_hackers';
+  info: {
+    singularName: 'project-hacker';
+    pluralName: 'project-hackers';
+    displayName: 'ProjectHacker';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    project: Attribute.Relation<
+      'api::project-hacker.project-hacker',
+      'oneToOne',
+      'api::project.project'
+    >;
+    users: Attribute.Relation<
+      'api::project-hacker.project-hacker',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project-hacker.project-hacker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project-hacker.project-hacker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Shared {
     export interface ContentTypes {
@@ -692,6 +885,11 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::event.event': ApiEventEvent;
+      'api::event-guest.event-guest': ApiEventGuestEventGuest;
+      'api::house.house': ApiHouseHouse;
+      'api::project.project': ApiProjectProject;
+      'api::project-hacker.project-hacker': ApiProjectHackerProjectHacker;
     }
   }
 }
