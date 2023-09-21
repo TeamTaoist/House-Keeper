@@ -19,7 +19,7 @@ export default function Home() {
   }, []);
   return (
     <Container>
-      <BannerText>Stort Your Hacker House Journey...</BannerText>
+      <BannerText>Start Your Hacker House Journey...</BannerText>
       <List>
         {houses.map((h, i) => (
           <HouseCard key={i} data={h} />
