@@ -768,7 +768,7 @@ export interface ApiHouseHouse extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    poster: Attribute.Media;
+    cover: Attribute.Media;
     title: Attribute.Text;
     subtitle: Attribute.Text;
     description: Attribute.Text;

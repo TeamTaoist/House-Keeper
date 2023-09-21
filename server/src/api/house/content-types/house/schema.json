@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "poster": {
+    "cover": {
       "type": "media",
       "multiple": false,
       "required": false,
