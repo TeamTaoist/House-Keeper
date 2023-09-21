@@ -92,7 +92,7 @@ export default function Hackers() {
 const Container = styled.div`
   height: calc(100vh - 80px);
   display: flex;
-  padding-inline: 40px;
+  padding: 60px;
   gap: 60px;
   & > div {
     height: 100%;
@@ -102,10 +102,6 @@ const Container = styled.div`
   }
   .right {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 `;
 

@@ -67,13 +67,13 @@ export default function Projects() {
 }
 
 const Contanier = styled.div`
-  padding: 40px;
+  padding: 60px;
 `;
 
 const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 50px;
+  gap: 40px;
   justify-content: space-between;
 
   li {

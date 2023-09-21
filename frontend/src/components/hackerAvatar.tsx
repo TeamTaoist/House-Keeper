@@ -28,6 +28,7 @@ const HackerAvatarStyle = styled.div<{ size?: string; fontSize?: string }>`
     height: ${(props) => props.size || "70px"};
     border-radius: 50%;
     border: 2px solid #000;
+    background-color: #fff;
   }
   p {
     font-size: ${(props) => props.fontSize || "14px"};

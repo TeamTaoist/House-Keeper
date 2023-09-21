@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import StatusTag from "components/statusTag";
+import HackerAvatar from "components/hackerAvatar";
 
 export default function HouseInfo() {
   return (
@@ -83,24 +84,10 @@ export default function HouseInfo() {
           </SectionTitle>
           <HackerList>
             <li>
-              <div className="img-box">
-                <img
-                  src="https://api.dicebear.com/7.x/lorelei/svg?seed=1"
-                  alt="avatar"
-                />
-              </div>
-
-              <div>Han Maymay</div>
+              <HackerAvatar name="Han Maymay" />
             </li>
             <li>
-              <div className="img-box">
-                <img
-                  src="https://api.dicebear.com/7.x/lorelei/svg?seed=2"
-                  alt="avatar"
-                />
-              </div>
-
-              <div>Han Maymay</div>
+              <HackerAvatar name="Han Maymay" />
             </li>
           </HackerList>
         </section>
@@ -111,8 +98,8 @@ export default function HouseInfo() {
 
 const Container = styled.div`
   display: flex;
-  gap: 30px;
-  padding-inline: 40px;
+  gap: 120px;
+  padding: 60px;
   section {
     margin-bottom: 30px;
   }
