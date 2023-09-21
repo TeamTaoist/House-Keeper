@@ -27,7 +27,7 @@ export default function Hackers() {
       <div className="right">
         <HackerCard>
           <HackerCardHead>
-            <HackerAvatar name="HAN MAYMAY" size="large" />
+            <HackerAvatar name="HAN MAYMAY" size="80px" fontSize="18px" />
           </HackerCardHead>
           <CardContent>
             <ItemBox>

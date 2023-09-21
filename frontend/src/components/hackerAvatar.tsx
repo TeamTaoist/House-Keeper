@@ -2,34 +2,35 @@ import styled from "@emotion/styled";
 
 interface IHackerProps {
   name: string;
-  size?: "large";
+  size?: string;
+  fontSize?: string;
 }
 
-export default function HackerAvatar({ name, size }: IHackerProps) {
+export default function HackerAvatar({ name, ...props }: IHackerProps) {
   return (
-    <HackerAvatarStyle size={size}>
+    <HackerAvatarStyle {...props}>
       <div>
         <img
           src={`https://api.dicebear.com/7.x/lorelei/svg?seed=${name}`}
           alt="avatar"
         />
       </div>
-      <p>{name}</p>
+      <p className="name">{name}</p>
     </HackerAvatarStyle>
   );
 }
 
-const HackerAvatarStyle = styled.div<{ size?: string }>`
+const HackerAvatarStyle = styled.div<{ size?: string; fontSize?: string }>`
   text-align: center;
   width: 100%;
   img {
-    width: ${(props) => (props.size === "large" ? "80px" : "70px")};
-    height: ${(props) => (props.size === "large" ? "80px" : "70px")};
+    width: ${(props) => props.size || "70px"};
+    height: ${(props) => props.size || "70px"};
     border-radius: 50%;
     border: 2px solid #000;
   }
   p {
-    font-size: ${(props) => (props.size === "large" ? "18px" : "14px")};
+    font-size: ${(props) => props.fontSize || "14px"};
     margin-top: 15px;
   }
 `;
