@@ -123,9 +123,12 @@ const List = styled.ul`
   flex-wrap: wrap;
   gap: 40px;
   justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
 
   li {
     width: 30%;
+    align-self: stretch;
   }
 `;
 

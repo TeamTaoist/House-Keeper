@@ -7,9 +7,27 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import HackerAvatar from "components/hackerAvatar";
+import request from "request/index";
+import { useEffect, useState } from "react";
+import { IUser } from "types/contentTypes";
 
 
 export default function Hackers() {
+  const [select, setSelect] = useState<IUser>();
+  const [hackers, setHackers] = useState<IUser[]>([]);
+  useEffect(() => {
+    const getHackers = () => { 
+      request.find("users", { populate: "*" }).then((res) => {
+        // @ts-ignore
+        setHackers(res);
+      });
+    };
+    getHackers();
+  }, [])
+
+  useEffect(() => {
+
+  }, [])
   return (
     <Container>
       <div className="left">
@@ -17,73 +35,77 @@ export default function Hackers() {
           All hackers
         </Typography>
         <HackerList>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <li key={index}>
-              <HackerAvatar name="HAN MAYMAY" />
+          {hackers.map((item, index) => (
+            <li key={index} onClick={() => setSelect(item)}>
+              <HackerAvatar name={item.username} />
             </li>
           ))}
         </HackerList>
       </div>
       <div className="right">
-        <HackerCard>
-          <HackerCardHead>
-            <HackerAvatar name="HAN MAYMAY" size="80px" fontSize="18px" />
-          </HackerCardHead>
-          <CardContent>
-            <ItemBox>
-              <ItemTitle>
-                <span>Github</span>
-              </ItemTitle>
-              <ItemContent>
-                <a href="12" target="_blank">
-                  https://github.com
-                </a>
-              </ItemContent>
-            </ItemBox>
-            <ItemBox>
-              <ItemTitle>
-                <span>HackerHouse</span>
-              </ItemTitle>
-              <ItemContent>
-                <List>
-                  <Link to={`/house/${1}`}>
-                    <ProjectBox></ProjectBox>
-                  </Link>
-                  <Link to={`/house/${1}`}>
-                    <ProjectBox></ProjectBox>
-                  </Link>
-                  <Link to={`/house/${1}`}>
-                    <ProjectBox></ProjectBox>
-                  </Link>
-                </List>
-              </ItemContent>
-            </ItemBox>
-            <ItemBox>
-              <ItemTitle>
-                <span>Project</span>
-              </ItemTitle>
-              <ItemContent>
-                <List>
-                  <Link to={`/project/${1}`}>
-                    <ProjectBox></ProjectBox>
-                  </Link>
-                  <Link to={`/project/${1}`}>
-                    <ProjectBox></ProjectBox>
-                  </Link>
-                  <Link to={`/project/${1}`}>
-                    <ProjectBox></ProjectBox>
-                  </Link>
-                </List>
-              </ItemContent>
-            </ItemBox>
-          </CardContent>
-          <ActionBox>
-            <Button>
-              <ThumbUpOffAltIcon />
-              <Num>233</Num>
-            </Button>
-          </ActionBox>
-        </HackerCard>
+        {select && (
+          <HackerCard>
+            <HackerCardHead>
+              <HackerAvatar
+                name={select.username}
+                size="80px"
+                fontSize="18px"
+              />
+            </HackerCardHead>
+            <CardContent>
+              <ItemBox>
+                <ItemTitle>
+                  <span>Email</span>
+                </ItemTitle>
+                <ItemContent>
+                  {/* <a href="12" target="_blank"> */}
+                  {select.email}
+                  {/* </a> */}
+                </ItemContent>
+              </ItemBox>
+              <ItemBox>
+                <ItemTitle>
+                  <span>HackerHouse</span>
+                </ItemTitle>
+                <ItemContent>
+                  <List>
+                    <Link to={`/house/${1}`}>
+                      <ProjectBox>
+                        <img
+                          src="https://hk-strapi.taoist.dev//uploads/Wechat_IMG_5001_7781e89381.jpg"
+                          alt=""
+                        />
+                      </ProjectBox>
+                    </Link>
+                  </List>
+                </ItemContent>
+              </ItemBox>
+              <ItemBox>
+                <ItemTitle>
+                  <span>Project</span>
+                </ItemTitle>
+                <ItemContent>
+                  <List>
+                    <Link to={`/house/${1}`}>
+                      <ProjectBox>
+                        <img
+                          src="https://hk-strapi.taoist.dev//uploads/6_861b060fc7.png"
+                          alt=""
+                        />
+                      </ProjectBox>
+                    </Link>
+                  </List>
+                </ItemContent>
+              </ItemBox>
+            </CardContent>
+            <ActionBox>
+              <Button>
+                <ThumbUpOffAltIcon />
+                <Num>0</Num>
+              </Button>
+            </ActionBox>
+          </HackerCard>
+        )}
       </div>
     </Container>
   );
@@ -153,6 +175,11 @@ const ProjectBox = styled.div`
   border: 2px solid #000;
   display: inline-block;
   cursor: pointer;
+  overflow: hidden;
+  img {
+    height: 100%;
+    transform: translateX(-10%);
+  }
 `;
 
 const ActionBox = styled(CardActions)`
