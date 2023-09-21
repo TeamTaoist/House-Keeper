@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 export default function HouseCard() {
   const navigate = useNavigate();
   return (
-    <Card sx={{ minWidth: 275 }} onClick={() => navigate(`/house/${1}`)}>
+    <CardStyle sx={{ minWidth: 275 }} onClick={() => navigate(`/house/${1}`)}>
       <StatusBox>
         <span className="status">进行中</span>
       </StatusBox>
@@ -26,9 +26,14 @@ export default function HouseCard() {
       <CardActions>
         <Button size="small">More</Button>
       </CardActions>
-    </Card>
+    </CardStyle>
   );
 }
+
+const CardStyle = styled(Card)`
+  border-radius: 16px;
+  cursor: pointer;
+`
 
 const CardContentStyle = styled(CardContent)`
   text-align: center;

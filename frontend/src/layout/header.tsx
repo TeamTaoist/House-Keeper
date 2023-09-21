@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import LogoIcon from "assets/images/logo.jpg";
 
 const routes = [
-  { name: "Houses", path: "/houses" },
+  { name: "Houses", path: "/" },
   { name: "Hackers", path: "/hackers" },
   { name: "Projects", path: "/projects" },
 ];

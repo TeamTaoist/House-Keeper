@@ -28,14 +28,19 @@ const Container = styled.div`
 `;
 
 const BannerText = styled.div`
-  font-size: 40px;
-  font-family: roboto;
+  font-size: 50px;
+  color: #000;
+  font-family: Roboto;
+  margin-top: 80px;
+  margin-bottom: 40px;
 `;
 
-const OperateBox = styled.div``;
+const OperateBox = styled.div`
+  margin-top: 40px;
+`;
 
 const List = styled.div`
   display: flex;
   justify-content: space-around;
-  gap: 20px;
+  gap: 40px;
 `;
