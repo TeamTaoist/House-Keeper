@@ -33,9 +33,8 @@ export default function Header() {
 const HeaderStyle = styled.header`
   height: 80px;
   line-height: 80px;
-  padding: 10px 30px;
+  padding: 10px 60px;
   box-sizing: border-box;
-  background-color: #fff;
 `;
 
 const HeaderContainer = styled.div`

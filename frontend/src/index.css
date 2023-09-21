@@ -25,3 +25,8 @@ a {
   text-decoration: none;
   color: unset;
 }
+
+.App {
+  min-height: 100vh;
+ background-image: linear-gradient(25deg, #bd8f8c, #a29c99, #81a7a6, #4eb2b4)
+}
