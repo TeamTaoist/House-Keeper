@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import LogoIcon from "assets/images/logo.jpg";
+
+const routes = [
+  { name: "Houses", path: "/houses" },
+  { name: "Hackers", path: "/hackers" },
+  { name: "Projects", path: "/projects" },
+];
 
 export default function Header() {
   return (
@@ -7,19 +14,14 @@ export default function Header() {
       <HeaderContainer>
         <HeaderLeft>
           <LogoLink to="/">
-            {/* <img src={LogoIcon} alt="" /> */}
-            <span>Gear House</span>
+            <img src={LogoIcon} alt="" />
           </LogoLink>
           <NavStyle>
-            <li>
-              <Link to="/houses">Houses</Link>
-            </li>
-            <li>
-              <Link to="/hackers">Hackers</Link>
-            </li>
-            <li>
-              <Link to="/projects">Projects</Link>
-            </li>
+            {routes.map((route, i) => (
+              <li key={i}>
+                <LinkStyle to={route.path} >{route.name}</LinkStyle>
+              </li>
+            ))}
           </NavStyle>
         </HeaderLeft>
         <div>connect</div>
@@ -44,22 +46,15 @@ const HeaderContainer = styled.div`
 `;
 
 const HeaderLeft = styled.div`
-    display: flex;
-    gap: 60px;
+  display: flex;
+  gap: 60px;
 `;
 
 const LogoLink = styled(Link)`
   img {
     position: relative;
-    top: 14px;
-    height: 36px;
-  }
-  @media (max-width: 414px) {
-    img {
-      top: 4px;
-      left: -0;
-      height: 18px;
-    }
+    top: 16px;
+    height: 60px;
   }
 `;
 
@@ -67,4 +62,8 @@ const NavStyle = styled.ul`
   display: flex;
   align-items: center;
   gap: 40px;
+`;
+
+const LinkStyle = styled(Link)`
+  font-size: 18px;
 `;
