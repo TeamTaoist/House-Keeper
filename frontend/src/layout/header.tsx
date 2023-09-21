@@ -59,9 +59,13 @@ export default function Header() {
           </NavStyle>
         </HeaderLeft>
         {selectedAccount ? (
-          <Button>{formatAddress(selectedAccount.address)}</Button>
+          <UserBox>
+            <Link to="/">{formatAddress(selectedAccount.address)}</Link>
+          </UserBox>
         ) : (
-          <Button variant="contained" onClick={connectWallet}>connect</Button>
+          <Button variant="contained" onClick={connectWallet}>
+            connect
+          </Button>
         )}
       </HeaderContainer>
     </HeaderStyle>
@@ -103,4 +107,13 @@ const NavStyle = styled.ul`
 
 const LinkStyle = styled(Link)`
   font-size: 18px;
+`;
+
+const UserBox = styled.div`
+  a {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 6px 12px;
+  }
 `;
