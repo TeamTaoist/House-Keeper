@@ -30,18 +30,18 @@ const ProjectCard = ({ data }: IProjectCardProps) => {
               },
             },
           },
+          populate: "*",
         })
         .then((res) => {
-          let users: IUser[] = [];
-          res.data.forEach((item) => {
-            users = users.concat(item.attributes.users || []);
-          });
-          setHackers(users);
+          setHackers(
+            res.data.map(
+              (item) => item.attributes.users_permissions_user.data.attributes
+            )
+          );
         });
     };
     data.id && getHackers();
   }, [data.id]);
-  console.log("users", hackers)
   return (
     <CardStyle>
       <img style={{ width: "100%" }} src={data.cover} alt="" />

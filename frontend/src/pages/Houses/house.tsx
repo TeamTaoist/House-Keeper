@@ -15,9 +15,9 @@ import {
   ApiProjectProject,
   IProject,
   ApiHouseHackerHouseHacker,
-  IHouseHacker,
   IUser,
 } from "types/contentTypes";
+import EventModal from "./eventModal";
 
 export default function HouseInfo() {
   const { id } = useParams();
@@ -25,6 +25,7 @@ export default function HouseInfo() {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [projects, setProjects] = useState<IProject[]>([]);
   const [hackers, setHackers] = useState<IUser[]>([]);
+  const [showEvent, setShowEvent] = useState<IEvent>();
 
   useEffect(() => {
     const getDetail = () => {
@@ -78,13 +79,14 @@ export default function HouseInfo() {
               id: { $eq: id },
             },
           },
+          populate: "*",
         })
         .then((res) => {
           let lst: IUser[] = [];
           res.data.forEach((item) => {
-            lst = lst.concat(item.attributes.users || []);
+            lst = lst.concat(item.attributes.users_permissions_user || []);
           });
-          setHackers(lst);
+          setHackers(res.data.map((item) => item.attributes.users_permissions_user.data.attributes));
         });
     };
     getDetail();
@@ -134,7 +136,7 @@ export default function HouseInfo() {
           </SectionTitle>
           <List>
             {events.map((item, i) => (
-              <li key={i}>
+              <li key={i} onClick={() => setShowEvent(item)}>
                 <Card>{item.title}</Card>
               </li>
             ))}
@@ -165,6 +167,9 @@ export default function HouseInfo() {
           </HackerList>
         </section>
       </div>
+      {showEvent && (
+        <EventModal handleClose={() => setShowEvent(undefined)} data={showEvent} />
+      )}
     </Container>
   );
 }

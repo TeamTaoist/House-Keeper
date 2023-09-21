@@ -831,7 +831,7 @@ interface IProjectHacker {
     "oneToOne",
     "api::project.project"
   >;
-  users: Attribute.Relation<
+  users_permissions_user: Attribute.Relation<
     "api::project-hacker.project-hacker",
     "oneToOne",
     "plugin::users-permissions.user"
@@ -873,7 +873,7 @@ export interface IHouseHacker {
     "oneToOne",
     "api::house.house"
   >;
-  users: Attribute.Relation<
+  users_permissions_user: Attribute.Relation<
     "api::house-hacker.house-hacker",
     "oneToOne",
     "plugin::users-permissions.user"
