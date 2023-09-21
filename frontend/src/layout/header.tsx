@@ -9,6 +9,7 @@ const routes = [
 ];
 
 export default function Header() {
+  const doConnect = () => {};
   return (
     <HeaderStyle>
       <HeaderContainer>
@@ -19,12 +20,12 @@ export default function Header() {
           <NavStyle>
             {routes.map((route, i) => (
               <li key={i}>
-                <LinkStyle to={route.path} >{route.name}</LinkStyle>
+                <LinkStyle to={route.path}>{route.name}</LinkStyle>
               </li>
             ))}
           </NavStyle>
         </HeaderLeft>
-        <div>connect</div>
+        <div onClick={doConnect}>connect</div>
       </HeaderContainer>
     </HeaderStyle>
   );

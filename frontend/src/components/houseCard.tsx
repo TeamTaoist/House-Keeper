@@ -5,22 +5,43 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router";
+import { IHouse } from "types/contentTypes";
+import { formatDate } from "utils/time";
+import { useMemo } from "react";
 
-export default function HouseCard() {
+interface IProps {
+  data: IHouse;
+}
+
+export default function HouseCard({ data }: IProps) {
   const navigate = useNavigate();
+
+  const formatStatus = useMemo(() => {
+    const now = new Date().getTime();
+    const start = new Date(data.startDate).getTime();
+    const end = new Date(data.endDate).getTime();
+    if (now < start) {
+      return "报名中";
+    } else if (now < end) {
+      return "进行中";
+    } else {
+      return "已结束";
+    }
+  }, [data]);
+
   return (
-    <CardStyle sx={{ minWidth: 275 }} onClick={() => navigate(`/house/${1}`)}>
+    <CardStyle sx={{ width: 345 }} onClick={() => navigate(`/house/${1}`)}>
       <StatusBox>
-        <span className="status">进行中</span>
+        <span className="status">{formatStatus}</span>
       </StatusBox>
       <CardContentStyle>
         <Typography variant="h5" component="div">
-          Build dApps on Vara Network
+          {data.title}
         </Typography>
 
-        <Typography variant="body2">Gear Hacker House 上海</Typography>
+        <Typography variant="body2">{data.subtitle}</Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          09.16-9.22
+          {formatDate(data.startDate)}-{formatDate(data.endDate)}
         </Typography>
       </CardContentStyle>
       <CardActions>
@@ -33,7 +54,10 @@ export default function HouseCard() {
 const CardStyle = styled(Card)`
   border-radius: 16px;
   cursor: pointer;
-`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`;
 
 const CardContentStyle = styled(CardContent)`
   text-align: center;

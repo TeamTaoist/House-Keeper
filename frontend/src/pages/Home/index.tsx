@@ -1,17 +1,30 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import HouseCard from "components/houseCard";
+import request from "request/index";
+import { ApiHouseHouse, IHouse } from "types/contentTypes";
 
 export default function Home() {
   const [houses, setHouses] = useState<IHouse[]>([]);
+
+  useEffect(() => {
+    const getList = () => {
+      request.find<ApiHouseHouse[]>("houses").then((res) => {
+        console.log("res: ", res);
+        setHouses(res.data.map(r => r.attributes));
+      });
+    };
+    getList();
+  }, []);
   return (
     <Container>
       <BannerText>Stort Your Hacker House Journey...</BannerText>
       <List>
-        <HouseCard />
-        <HouseCard />
-        <HouseCard />
+        {houses.map((h, i) => (
+          <HouseCard key={i} data={h} />
+        ))}
+
       </List>
       <OperateBox>
         <Button variant="contained">Explore More</Button>
