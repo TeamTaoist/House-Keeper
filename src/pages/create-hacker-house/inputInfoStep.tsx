@@ -2,8 +2,13 @@ import styled from "@emotion/styled";
 import TextField from "@mui/material/TextField";
 import { FormEvent, useState } from "react";
 import RangeDatePicker from "../../components/rangeDatePicker";
+import Button from "@mui/material/Button";
 
-export default function InputInfoStep() {
+interface IProps {
+  onNext: () => void;
+}
+
+export default function InputInfoStep({ onNext }: IProps) {
   const [poster, setPoster] = useState("");
   const [logo, setLogo] = useState("");
   const [startDate] = useState();
@@ -112,6 +117,11 @@ export default function InputInfoStep() {
           </UploadBox>
         </Row>
       </RowCols>
+      <OptionBox>
+        <Button variant="contained" onClick={onNext}>
+          Next
+        </Button>
+      </OptionBox>
     </SectionBlock>
   );
 }
@@ -191,4 +201,9 @@ const ImgBox = styled.div`
       display: flex;
     }
   }
+`;
+
+const OptionBox = styled.div`
+  text-align: center;
+  margin-top: 40px;
 `;

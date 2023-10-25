@@ -41,6 +41,9 @@ const Box = styled.div`
     width: 100%;
     height: 56px;
   }
+  .react-datepicker-popper {
+    z-index: 9;
+  }
   .borderLess {
     width: 100%;
     height: 56px;
