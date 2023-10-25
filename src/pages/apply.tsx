@@ -1,15 +1,20 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import FormModal from "../components/formModal";
+import CalModal from "../components/calModal";
 
 export default function ApplyPage() {
   const [showForm, setShowForm] = useState(false);
-  const [openCalendar, setOpenCalendar] = useState(false);
+    const [openCalendar, setOpenCalendar] = useState(true);
+    const [showCalendar, setShowCalendar] = useState(false);
 
   const handleCloseForm = () => {
     // TODO: check apply result
     setOpenCalendar(true);
     setShowForm(false);
+  };
+  const handleCloseCal = () => {
+    setShowCalendar(false);
   };
   return (
     <Page>
@@ -18,8 +23,11 @@ export default function ApplyPage() {
       </section>
       {openCalendar && (
         <section>
-          <h5>预约时间</h5>
+          <button onClick={() => setShowCalendar(true)}>预约时间</button>
         </section>
+      )}
+      {showCalendar && (
+        <CalModal show={showCalendar} handleClose={handleCloseCal} />
       )}
       {showForm && <FormModal show={showForm} handleClose={handleCloseForm} />}
     </Page>
