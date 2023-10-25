@@ -17,8 +17,8 @@ export default function Header() {
           <Link to="/how-to-docs">Guidance</Link>
         </div>
         <div>
-          <Link to="/create_house">
-            <Button>Create</Button>
+          <Link to="/create-hacker-house">
+            <Button variant="contained">Create</Button>
           </Link>
         </div>
       </nav>
