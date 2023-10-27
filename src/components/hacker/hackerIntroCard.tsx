@@ -18,7 +18,7 @@ export default function HackerIntroCard() {
       </ProjectList>
       <ViewMore>
         <a
-          href={`${window.location.origin}/hacker/1`}
+          href={`${window.location.origin}/#/hacker/1`}
           target="_blank"
           rel="noopener noreferrer"
         >

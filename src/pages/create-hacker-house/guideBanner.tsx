@@ -13,7 +13,7 @@ export default function GuideBanner() {
       <Cards>
         <li>
           <a
-            href={`${window.location.origin}/how-to-docs`}
+            href={`${window.location.origin}/#/how-to-docs`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -22,7 +22,7 @@ export default function GuideBanner() {
         </li>
         <li>
           <a
-            href={`${window.location.origin}/how-to-docs`}
+            href={`${window.location.origin}/#/how-to-docs`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -31,7 +31,7 @@ export default function GuideBanner() {
         </li>
         <li>
           <a
-            href={`${window.location.origin}/how-to-docs`}
+            href={`${window.location.origin}/#/how-to-docs`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -41,7 +41,7 @@ export default function GuideBanner() {
       </Cards>
 
       <a
-        href={`${window.location.origin}/how-to-docs`}
+        href={`${window.location.origin}/#/how-to-docs`}
         target="_blank"
         rel="noopener noreferrer"
       >
