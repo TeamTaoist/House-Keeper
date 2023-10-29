@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.jpg";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import LoginButton from "./loginButton";
 
 export default function Header() {
   return (
@@ -17,14 +17,12 @@ export default function Header() {
           <Link to="/explore/hackers">Hackers</Link>
           <Link to="/how-to-docs">Guidance</Link>
         </div>
-        <div>
+        <HeaderRight>
           <Link to="/create-hacker-house">
             <Button variant="contained">Create</Button>
           </Link>
-        </div>
-        <div>
-          <ConnectButton chainStatus="none" showBalance={false} />
-        </div>
+          <LoginButton />
+        </HeaderRight>
       </nav>
     </HeaderStyle>
   );
@@ -54,4 +52,10 @@ const HeaderStyle = styled.header`
   height: 60px;
   border-bottom: 1px solid #ddd;
   line-height: 60px;
+`;
+
+const HeaderRight = styled.div`
+  display: inline-flex;
+  gap: 20px;
+  align-items: center;
 `;
