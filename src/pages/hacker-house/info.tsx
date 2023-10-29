@@ -11,13 +11,18 @@ import Grid from "@mui/material/Grid";
 import ProjectItem from "../../components/projectItem";
 import HackerAvatar from "../../components/hacker/hackerAvatar";
 import AlbumItem from "../../components/albumItem";
+import { useEffect } from "react";
 
 export default function HackerHouseInfoPage() {
   const { id } = useParams();
   const [projects] = useState([]);
+
+  useEffect(() => {
+    // TODO
+  }, [id]);
+
   return (
     <PageStyle>
-      <h1>{id}</h1>
       <TopSection>
         {projects.length > 0 ? (
           <>
@@ -108,6 +113,6 @@ const BlockTitle = styled.div`
 const BlockContent = styled.div``;
 
 const ApplyBox = styled.div`
-    padding-block: 40px;
-    text-align: center;
-`
+  padding-block: 40px;
+  text-align: center;
+`;

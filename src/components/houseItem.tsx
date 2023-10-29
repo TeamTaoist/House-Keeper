@@ -67,7 +67,7 @@ export const HouseItemColumn = ({
       <Title>Build dApps on Vara Network</Title>
       <img
         className="banner"
-        src="	https://www.stylearena.net/wp-content/uploads/2015/04/cute-cat-in-jeans-1024x640.jpg"
+        src="https://www.stylearena.net/wp-content/uploads/2015/04/cute-cat-in-jeans-1024x640.jpg"
         alt=""
       />
       <TimeBox>
