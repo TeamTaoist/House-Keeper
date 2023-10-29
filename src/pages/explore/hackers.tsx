@@ -12,7 +12,7 @@ export default function ExploreHackers() {
         <SearchInput placeholder="Search" />
       </OptionBox>
       <ContentBox>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} rowSpacing={6}>
           {new Array(20).fill(0).map((item, index) => (
             <Grid item xs={4} sm={3} lg={2} key={index}>
               <HackerAvatar />

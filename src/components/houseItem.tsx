@@ -13,7 +13,7 @@ export default function HouseItem() {
     >
       <img
         className="banner"
-        src="	https://www.stylearena.net/wp-content/uploads/2015/04/cute-cat-in-jeans-1024x640.jpg"
+        src="https://www.stylearena.net/wp-content/uploads/2015/04/cute-cat-in-jeans-1024x640.jpg"
         alt=""
       />
       <Title>Build dApps on Vara Network</Title>
@@ -21,7 +21,7 @@ export default function HouseItem() {
         <span> Host By</span>
         <span>
           <img
-            src="	https://img0.baidu.com/it/u=187070227,2985336747&fm=253&fmt=auto&app=138&f=JPEG?w=498&h=500"
+            src="https://img0.baidu.com/it/u=187070227,2985336747&fm=253&fmt=auto&app=138&f=JPEG?w=498&h=500"
             alt=""
           />
         </span>
