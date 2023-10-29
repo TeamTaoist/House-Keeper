@@ -50,9 +50,9 @@ export default function ExploreHouses() {
         <SearchInput placeholder="Search" />
       </OptionBox>
       <ContentBox>
-        <Grid container spacing={2}>
+        <Grid container spacing={6}>
           {new Array(20).fill(0).map((item, index) => (
-            <Grid item xs={12} sm={6} lg={3} key={index}>
+            <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <HouseItem />
             </Grid>
           ))}
