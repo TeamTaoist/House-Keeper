@@ -10,7 +10,11 @@ export default function ProjectItem() {
           alt=""
         />
       </Banner>
-      <Title>Project name. No more than 20 words</Title>
+      <Title
+        onClick={() => window.open(`${window.location.origin}/#/project/${1}`)}
+      >
+        Project name. No more than 20 words
+      </Title>
       <Intro>
         As a leader in innovation, Gear's Hacker House will put you at the
         forefront of Web3 technology, building decentralized applications on the
@@ -40,6 +44,7 @@ const Title = styled.div`
   font-size: 18px;
   font-weight: bold;
   margin-top: 22px;
+  cursor: pointer;
 `;
 
 const Intro = styled.div`

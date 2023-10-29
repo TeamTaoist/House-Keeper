@@ -6,6 +6,8 @@ import ApplyPage from "./pages/apply";
 import ExploreHouses from "./pages/explore/houses";
 import ExploreHackers from "./pages/explore/hackers";
 import ExploreProjects from "./pages/explore/projects";
+import HackerHouseInfoPage from "./pages/hacker-house/info";
+import ProjectInfoPage from "./pages/project/info";
 
 export default function RouterLink() {
   return (
@@ -17,6 +19,9 @@ export default function RouterLink() {
         <Route path="/explore/hackers" element={<ExploreHackers />} />
         <Route path="/explore/projects" element={<ExploreProjects />} />
         <Route path="/create-hacker-house" element={<CreateHousePage />} />
+        <Route path="/hacker-house/:id" element={<HackerHouseInfoPage />} />
+        <Route path="/project/:id" element={<ProjectInfoPage />} />
+
         <Route path="/apply" element={<ApplyPage />} />
       </Routes>
     </Router>

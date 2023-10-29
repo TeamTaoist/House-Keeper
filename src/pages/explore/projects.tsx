@@ -12,7 +12,7 @@ export default function ExploreProjects() {
         <SearchInput placeholder="Search" />
       </OptionBox>
       <ContentBox>
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           {new Array(20).fill(0).map((item, index) => (
             <Grid item xs={12} sm={6} lg={3} key={index}>
               <ProjectItem />
