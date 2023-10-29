@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.jpg";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export default function Header() {
   return (
@@ -20,6 +21,9 @@ export default function Header() {
           <Link to="/create-hacker-house">
             <Button variant="contained">Create</Button>
           </Link>
+        </div>
+        <div>
+          <ConnectButton chainStatus="none" showBalance={false} />
         </div>
       </nav>
     </HeaderStyle>
