@@ -3,13 +3,14 @@ import { PageStyle } from "../../assets/styles/global";
 import { useParams } from "react-router-dom";
 import { HouseItemFullWidth } from "../../components/house-card-item/houseItem";
 import HouseItemColumn from "../../components/house-card-item/houseColumn";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import ProjectItem from "../../components/projectItem";
 import HackerAvatar from "../../components/hacker/hackerAvatar";
 import AlbumItem from "../../components/albumItem";
 import { useEffect } from "react";
+import ApplyProgress from "../../components/applyProgress";
 
 export default function HackerHouseInfoPage() {
   const { id } = useParams();
@@ -22,13 +23,14 @@ export default function HackerHouseInfoPage() {
   return (
     <PageStyle>
       <TopSection>
-        {projects.length > 0 ? (
+        {/* TODO */}
+        {projects.length === 0 ? (
           <>
             <HouseItemColumn>
               <Button variant="contained">Apply</Button>
             </HouseItemColumn>
             <div>
-              <BlockTitle className="title">Projects</BlockTitle>
+              {/* <BlockTitle className="title">Projects</BlockTitle>
               <BlockContent>
                 <Grid container spacing={4}>
                   {new Array(5).fill(0).map((item, index) => (
@@ -37,7 +39,8 @@ export default function HackerHouseInfoPage() {
                     </Grid>
                   ))}
                 </Grid>
-              </BlockContent>
+              </BlockContent> */}
+              <ApplyProgress />
             </div>
           </>
         ) : (
