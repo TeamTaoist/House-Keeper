@@ -1,7 +1,62 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Popper from "@mui/material/Popper";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import { useState, useRef, useMemo } from "react";
 
 const LoginButton = () => {
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLButtonElement>(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event: Event | React.SyntheticEvent) => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event: React.KeyboardEvent) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === "Escape") {
+      setOpen(false);
+    }
+  }
+
+  const menus = useMemo(() => {
+    return [
+      {
+        label: "Profile",
+        path: "",
+      },
+      {
+        label: "My House",
+        path: "",
+      },
+      {
+        label: "Manage",
+        path: "",
+      },
+      {
+        label: "Disconnect",
+        path: "",
+      },
+    ];
+  }, []);
+
   return (
     <ConnectButton.Custom>
       {({
@@ -81,7 +136,54 @@ const LoginButton = () => {
                     )}
                     {chain.name}
                   </button> */}
-                  <Button variant="contained">{account.displayName}</Button>
+                  <Button
+                    variant="contained"
+                    ref={anchorRef}
+                    id="composition-button"
+                    aria-controls={open ? "composition-menu" : undefined}
+                    aria-expanded={open ? "true" : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                  >
+                    {account.displayName}
+                  </Button>
+                  <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    placement="bottom-start"
+                    transition
+                    disablePortal
+                  >
+                    {({ TransitionProps, placement }) => (
+                      <Grow
+                        {...TransitionProps}
+                        style={{
+                          transformOrigin:
+                            placement === "bottom-start"
+                              ? "left top"
+                              : "left bottom",
+                        }}
+                      >
+                        <Paper>
+                          <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList
+                              autoFocusItem={open}
+                              id="composition-menu"
+                              aria-labelledby="composition-button"
+                              onKeyDown={handleListKeyDown}
+                            >
+                              {menus.map((item, index) => (
+                                <MenuItem key={index} onClick={handleClose}>
+                                  {item.label}
+                                </MenuItem>
+                              ))}
+                            </MenuList>
+                          </ClickAwayListener>
+                        </Paper>
+                      </Grow>
+                    )}
+                  </Popper>
                 </div>
               );
             })()}
