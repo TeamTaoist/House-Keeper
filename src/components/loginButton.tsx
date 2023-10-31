@@ -7,8 +7,15 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import { useState, useRef, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+
+type MenuType = {
+  label: string;
+  path: string;
+};
 
 const LoginButton = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
 
@@ -27,6 +34,14 @@ const LoginButton = () => {
     setOpen(false);
   };
 
+  const handleClickMenu = (
+    event: Event | React.SyntheticEvent,
+    { path }: MenuType
+  ) => {
+    handleClose(event);
+    navigate(path);
+  };
+
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -40,7 +55,7 @@ const LoginButton = () => {
     return [
       {
         label: "Profile",
-        path: "",
+        path: "/profile",
       },
       {
         label: "My House",
@@ -174,7 +189,10 @@ const LoginButton = () => {
                               onKeyDown={handleListKeyDown}
                             >
                               {menus.map((item, index) => (
-                                <MenuItem key={index} onClick={handleClose}>
+                                <MenuItem
+                                  key={index}
+                                  onClick={(e) => handleClickMenu(e, item)}
+                                >
                                   {item.label}
                                 </MenuItem>
                               ))}
