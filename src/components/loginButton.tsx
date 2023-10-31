@@ -63,7 +63,7 @@ const LoginButton = () => {
       },
       {
         label: "Manage",
-        path: "",
+        path: "/manage/hacker-house",
       },
       {
         label: "Disconnect",

@@ -9,6 +9,7 @@ import ExploreProjects from "./pages/explore/projects";
 import HackerHouseInfoPage from "./pages/hacker-house/info";
 import ProjectInfoPage from "./pages/project/info";
 import Profile from "./pages/profile";
+import ManageHackerHouse from "./pages/project/hackerHouse";
 
 export default function RouterLink() {
   return (
@@ -26,6 +27,7 @@ export default function RouterLink() {
         <Route path="/apply" element={<ApplyPage />} />
         {/* user */}
         <Route path="/profile" element={<Profile />} />
+        <Route path="/manage/hacker-house" element={<ManageHackerHouse />} />
       </Routes>
     </Router>
   );
