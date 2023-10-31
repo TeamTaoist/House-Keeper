@@ -19,10 +19,15 @@ a:hover {
   color: #3689db;
 }
 
+html {
+  min-height: 100vh;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 h1 {

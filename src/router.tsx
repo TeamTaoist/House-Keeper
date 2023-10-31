@@ -11,6 +11,7 @@ import ProjectInfoPage from "./pages/project/info";
 import Profile from "./pages/profile";
 import ManageHackerHouseIndex from "./pages/manage/index";
 import ManageHackerHouse from "./pages/manage/hackerHouse";
+import GuidancePage from "./pages/guidancePage";
 
 export default function RouterLink() {
   return (
@@ -18,6 +19,7 @@ export default function RouterLink() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/how-to-docs" element={<GuidancePage />} />
         <Route path="/explore/hacker-houses" element={<ExploreHouses />} />
         <Route path="/explore/hackers" element={<ExploreHackers />} />
         <Route path="/explore/projects" element={<ExploreProjects />} />
@@ -32,7 +34,10 @@ export default function RouterLink() {
           path="/manage/hacker-house"
           element={<ManageHackerHouseIndex />}
         />
-        <Route path="/manage/hacker-house/:id" element={<ManageHackerHouse />} />
+        <Route
+          path="/manage/hacker-house/:id"
+          element={<ManageHackerHouse />}
+        />
       </Routes>
     </Router>
   );
