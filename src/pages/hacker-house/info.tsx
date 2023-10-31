@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
 import { PageStyle } from "../../assets/styles/global";
 import { useParams } from "react-router-dom";
-import {
-  HouseItemColumn,
-  HouseItemFullWidth,
-} from "../../components/houseItem";
+import { HouseItemFullWidth } from "../../components/house-card-item/houseItem";
+import HouseItemColumn from "../../components/house-card-item/houseColumn";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";

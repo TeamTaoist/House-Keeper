@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { PageStyle } from "../assets/styles/global";
 import Grid from "@mui/material/Grid";
-import HouseItem from "../components/houseItem";
+import HouseItem from "../components/house-card-item/houseItem";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 
