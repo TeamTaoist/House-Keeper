@@ -3,11 +3,13 @@ import styled from "@emotion/styled";
 import { Host, TimeBox, Intro } from "./style";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import Button from "@mui/material/Button";
 
 export default function ManageHouseItem() {
   return (
-    <HouseItemFullWidthCard>
+    <HouseItemFullWidthCard
+      href={`${window.location.origin}/#/manage/hacker-house/${1}`}
+      target="_blank"
+    >
       <TopBox>
         <div>
           <Title>Build dApps on Vara Network</Title>
@@ -49,18 +51,13 @@ export default function ManageHouseItem() {
           </TimeBox>
           <EditBpx>
             <p>last Edit at Sep 7, 2023 10:00 a.m.</p>
-            <p>
-              <Button variant="contained" color="primary" size="large">
-                Edit
-              </Button>
-            </p>
           </EditBpx>
         </div>
 
         <div className="banner-box">
           <img
             className="banner"
-            src="	https://www.stylearena.net/wp-content/uploads/2015/04/cute-cat-in-jeans-1024x640.jpg"
+            src="https://www.stylearena.net/wp-content/uploads/2015/04/cute-cat-in-jeans-1024x640.jpg"
             alt=""
           />
         </div>
@@ -69,7 +66,8 @@ export default function ManageHouseItem() {
   );
 }
 
-const HouseItemFullWidthCard = styled.div`
+const HouseItemFullWidthCard = styled.a`
+  display: block;
   background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   padding: 40px;
   border-radius: 16px;

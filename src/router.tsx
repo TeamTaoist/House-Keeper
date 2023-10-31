@@ -9,7 +9,8 @@ import ExploreProjects from "./pages/explore/projects";
 import HackerHouseInfoPage from "./pages/hacker-house/info";
 import ProjectInfoPage from "./pages/project/info";
 import Profile from "./pages/profile";
-import ManageHackerHouse from "./pages/project/hackerHouse";
+import ManageHackerHouseIndex from "./pages/manage/index";
+import ManageHackerHouse from "./pages/manage/hackerHouse";
 
 export default function RouterLink() {
   return (
@@ -27,7 +28,11 @@ export default function RouterLink() {
         <Route path="/apply" element={<ApplyPage />} />
         {/* user */}
         <Route path="/profile" element={<Profile />} />
-        <Route path="/manage/hacker-house" element={<ManageHackerHouse />} />
+        <Route
+          path="/manage/hacker-house"
+          element={<ManageHackerHouseIndex />}
+        />
+        <Route path="/manage/hacker-house/:id" element={<ManageHackerHouse />} />
       </Routes>
     </Router>
   );

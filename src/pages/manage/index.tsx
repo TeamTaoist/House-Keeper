@@ -15,7 +15,7 @@ export default function ManageHackerHouse() {
 }
 
 const HouseList = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
