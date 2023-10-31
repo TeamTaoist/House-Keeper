@@ -3,7 +3,7 @@ import { PageStyle } from "../../assets/styles/global";
 import { useEffect, useMemo, useState } from "react";
 import { HouseStatus } from "../../@types/house";
 import Grid from "@mui/material/Grid";
-import HouseItem from "../../components/houseItem";
+import HouseItem from "../../components/house-card-item/houseItem";
 
 export default function ExploreHouses() {
   const [selectStatus, setSelectStatus] = useState<string | HouseStatus>("all");
