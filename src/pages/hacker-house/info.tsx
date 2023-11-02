@@ -20,6 +20,13 @@ export default function HackerHouseInfoPage() {
     // TODO
   }, [id]);
 
+  const go2Apply = () => {
+    window.open(
+      `${window.location.origin}/#/hacker-house/${id}/apply`,
+      "_blank"
+    );
+  };
+
   return (
     <PageStyle>
       <TopSection>
@@ -27,7 +34,9 @@ export default function HackerHouseInfoPage() {
         {projects.length === 0 ? (
           <>
             <HouseItemColumn>
-              <Button variant="contained">Apply</Button>
+              <Button variant="contained" onClick={go2Apply}>
+                Apply
+              </Button>
             </HouseItemColumn>
             <div>
               {/* <BlockTitle className="title">Projects</BlockTitle>
@@ -46,7 +55,9 @@ export default function HackerHouseInfoPage() {
         ) : (
           <HouseItemFullWidth>
             <ApplyBox>
-              <Button variant="contained">Apply</Button>
+              <Button variant="contained" onClick={go2Apply}>
+                Apply
+              </Button>
             </ApplyBox>
           </HouseItemFullWidth>
         )}

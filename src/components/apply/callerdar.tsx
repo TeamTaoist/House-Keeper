@@ -1,17 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import styled from "@emotion/styled";
-import Modal from "react-bootstrap/Modal";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-interface IProps {
-  show: boolean;
-  handleClose: () => void;
-}
-
-export default function CalModal({ show, handleClose }: IProps) {
+export default function Calledar({ onSuccess }: { onSuccess: () => void }) {
   useEffect(() => {
     const init = async () => {
       const cal = await getCalApi();
@@ -24,21 +16,12 @@ export default function CalModal({ show, handleClose }: IProps) {
           // `namespace` tells you the Cal namespace for which the event is fired/
           const { data, type, namespace } = e.detail;
           console.log(data, type, namespace);
+          toast.success("Successfully booked!");
+          onSuccess();
         },
       });
     };
     init();
   }, []);
-  return (
-    <ModalContent show={show} onHide={handleClose} backdrop="static">
-      <Cal calLink="joannazzz/30min"></Cal>
-    </ModalContent>
-  );
+  return <Cal calLink="joannazzz/30min"></Cal>;
 }
-
-const ModalContent = styled(Modal)`
-  background-color: #fff;
-  color: #333;
-  margin: 0 auto;
-  padding-top: 20px;
-`;
