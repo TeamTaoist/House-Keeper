@@ -12,6 +12,7 @@ import Profile from "./pages/profile";
 import ManageHackerHouseIndex from "./pages/manage/index";
 import ManageHackerHouse from "./pages/manage/hackerHouse";
 import GuidancePage from "./pages/guidancePage";
+import MyHousePage from "./pages/myHouse";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -31,8 +32,10 @@ export default function RouterLink() {
 
         <Route path="/project/:id" element={<ProjectInfoPage />} />
 
+
         {/* user */}
         <Route path="/profile" element={<Profile />} />
+        <Route path="/my-house" element={<MyHousePage />} />
         <Route
           path="/manage/hacker-house"
           element={<ManageHackerHouseIndex />}
