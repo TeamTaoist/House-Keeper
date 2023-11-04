@@ -4,8 +4,11 @@ import ManageHouseInnerItem from "../../components/house-card-item/manageHouseIn
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ProjectItem from "../../components/projectItem";
 import Button from "@mui/material/Button";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ManageHackerHouse() {
+  const { id } = useParams();
+  const naviagate = useNavigate();
   return (
     <PageStyle>
       <Content>
@@ -17,7 +20,11 @@ export default function ManageHackerHouse() {
         <div>
           <SectionBlock>
             <BlockTitle>Hacker manage</BlockTitle>
-            <ApplicationBox>
+            <ApplicationBox
+              onClick={() =>
+                naviagate(`/manage/hacker-house/${id}/registraction-result`)
+              }
+            >
               <span>Application result</span>
               <ChevronRightIcon />
             </ApplicationBox>
