@@ -4,11 +4,18 @@ import { Host, TimeBox, Intro } from "./style";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
-export default function ManageHouseItem() {
+export default function ManageHouseItem({
+  children,
+  ...rest
+}: {
+  children?: React.ReactNode;
+  [k: string]: any;
+}) {
   return (
     <HouseItemFullWidthCard
       href={`${window.location.origin}/#/manage/hacker-house/${1}`}
       target="_blank"
+      {...rest}
     >
       <TopBox>
         <div>
@@ -49,9 +56,8 @@ export default function ManageHouseItem() {
               <span>Shanghai, China</span>
             </div>
           </TimeBox>
-          <EditBpx>
-            <p>last Edit at Sep 7, 2023 10:00 a.m.</p>
-          </EditBpx>
+          {children}
+         
         </div>
 
         <div className="banner-box">
@@ -94,9 +100,4 @@ const BottomBox = styled.div`
 const Title = styled.div`
   font-size: 24px;
   font-weight: bold;
-`;
-
-const EditBpx = styled.div`
-  color: #666;
-  margin-top: 16px;
 `;

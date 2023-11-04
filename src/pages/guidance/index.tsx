@@ -1,44 +1,32 @@
-import { PageStyle } from "../assets/styles/global";
+import { PageStyle } from "../../assets/styles/global";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import HowToIcon from "../../assets/images/doc/howto.jpg";
+import { Link } from "react-router-dom";
 
-const DOCS = [
+type DocCardProps = {
+  poster: string;
+  title: string;
+  desc?: string;
+  id: string;
+};
+
+const DOCS: DocCardProps[] = [
   {
-    poster: "",
-    title: "",
-    desc: "",
-  },
-  {
-    poster: "",
-    title: "",
-    desc: "",
-  },
-  {
-    poster: "",
-    title: "",
-    desc: "",
-  },
-  {
-    poster: "",
-    title: "",
-    desc: "",
-  },
-  {
-    poster: "",
-    title: "",
-    desc: "",
+    poster: HowToIcon,
+    title: "House Keeper guidance",
+    desc: "111",
+    id: "50019d8cada9474d84b6c45cfde04ec4",
   },
 ];
 
-const DocCard = () => {
+const DocCard = ({ data }: { data: DocCardProps }) => {
   return (
-    <DocCardStyle>
-      <div className="img"></div>
-      <DocCardTitle>What is a hacker house</DocCardTitle>
-      <DocCardDescription>
-        A description of what hacker house is
-      </DocCardDescription>
+    <DocCardStyle to={`/how-to-docs/${data.id}`}>
+      <img src={data.poster} alt="" />
+      <DocCardTitle>{data.title}</DocCardTitle>
+      <DocCardDescription>{data.desc}</DocCardDescription>
     </DocCardStyle>
   );
 };
@@ -47,10 +35,12 @@ const TemplateCard = () => {
   return (
     <TemplateCardStyle>
       <p>Disclaimer agreement</p>
-      <Button variant="contained" size="small">View</Button>
+      <Button variant="contained" size="small">
+        View
+      </Button>
     </TemplateCardStyle>
   );
-}
+};
 
 export default function GuidancePage() {
   return (
@@ -62,7 +52,7 @@ export default function GuidancePage() {
           <Grid container spacing={4}>
             {DOCS.map((item, index) => (
               <Grid item xs={12} sm={6} lg={3} key={index}>
-                <DocCard />
+                <DocCard data={item} />
               </Grid>
             ))}
           </Grid>
@@ -98,12 +88,14 @@ const SectionDesc = styled.p``;
 
 const SectionContent = styled.div``;
 
-const DocCardStyle = styled.div`
-  .img {
+const DocCardStyle = styled(Link)`
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 16px;
+  padding-bottom: 20px;
+  img {
     width: 100%;
-    height: 150px;
     background-color: #ccc;
-    margin-bottom: 16px;
     border-radius: 8px;
   }
 `;
@@ -111,9 +103,12 @@ const DocCardStyle = styled.div`
 const DocCardTitle = styled.div`
   font-size: 16px;
   font-weight: bold;
+  padding-inline: 20px;
+  margin-bottom: 10px;
 `;
 const DocCardDescription = styled.div`
   font-size: 14px;
+  padding-inline: 20px;
 `;
 
 const TemplateCardStyle = styled.div`

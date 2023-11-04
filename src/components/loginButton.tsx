@@ -59,7 +59,7 @@ const LoginButton = () => {
       },
       {
         label: "My House",
-        path: "",
+        path: "/my-house",
       },
       {
         label: "Manage",

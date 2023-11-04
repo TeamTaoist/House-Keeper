@@ -5,12 +5,15 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 export default function HouseItemColumn({
   children,
+  canOpen,
 }: {
   children?: React.ReactNode;
+  canOpen?: boolean;
 }) {
   return (
     <HouseColumnCard
       onClick={() =>
+        canOpen &&
         window.open(`${window.location.origin}/#/hacker-house/${1}`, "_blank")
       }
     >
