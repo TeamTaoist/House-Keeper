@@ -35,5 +35,5 @@ export default function GuidanceNotion() {
 
 const Content = styled.div`
   background-color: #fff;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 180px);
 `;
