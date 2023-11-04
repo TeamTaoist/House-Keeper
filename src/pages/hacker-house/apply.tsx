@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 export default function HackerHouseApplyPage() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
 
   const checkSubmitFromBackend = () => {
     // TODO
