@@ -7,6 +7,7 @@ import ExploreHackers from "./pages/explore/hackers";
 import ExploreProjects from "./pages/explore/projects";
 import HackerHouseInfoPage from "./pages/hacker-house/info";
 import ApplyPage from "./pages/hacker-house/apply";
+import ApplyProjectPage from "./pages/hacker-house/applyProject";
 import ProjectInfoPage from "./pages/project/info";
 import Profile from "./pages/profile";
 import ManageHackerHouseIndex from "./pages/manage/index";
@@ -29,9 +30,12 @@ export default function RouterLink() {
         <Route path="/create-hacker-house" element={<CreateHousePage />} />
         <Route path="/hacker-house/:id" element={<HackerHouseInfoPage />} />
         <Route path="/hacker-house/:id/apply" element={<ApplyPage />} />
+        <Route
+          path="/hacker-house/:id/apply-project"
+          element={<ApplyProjectPage />}
+        />
 
         <Route path="/project/:id" element={<ProjectInfoPage />} />
-
 
         {/* user */}
         <Route path="/profile" element={<Profile />} />
